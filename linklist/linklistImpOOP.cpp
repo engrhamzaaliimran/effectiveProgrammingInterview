@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <memory>
 
@@ -82,7 +81,6 @@ public:
         return head;
     }
 
-
     void mergeSortedLists(shared_ptr<node> head2)
     {
         shared_ptr<node> mergedListHead;
@@ -129,6 +127,23 @@ public:
             mergedListTail->next_ptr = head2;
         head = mergedListHead;
     }
+
+    void reverseLinkedList()
+    {
+        shared_ptr<node> prev = nullptr;
+        shared_ptr<node> curr = head;
+        shared_ptr<node> next_node;
+
+        while (curr != nullptr)
+        {
+            next_node = curr->next_ptr;
+            curr->next_ptr = prev;
+            prev = curr;
+            curr = next_node;
+        }
+
+        head = prev;
+    }
 };
 
 int main()
@@ -138,15 +153,10 @@ int main()
     mylist1.add_data(455);
     mylist1.add_data(456);
     mylist1.add_data(899);
+    mylist1.add_data(9);
 
     mylist1.print_list();
 
-    mylist2.add_data(3);
-    mylist2.add_data(8);
-    mylist2.add_data(12);
-
-    mylist2.print_list();
-
-    mylist1.mergeSortedLists(mylist2.getHead());
+    mylist1.reverseLinkedList();
     mylist1.print_list();
 }
